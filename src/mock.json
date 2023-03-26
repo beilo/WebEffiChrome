@@ -1,0 +1,60 @@
+{
+    "errcode": 0,
+    "errmsg": "成功！",
+    "data": {
+        "query_path": {
+            "path": "/get/test",
+            "params": []
+        },
+        "edit_uid": 0,
+        "status": "undone",
+        "type": "static",
+        "req_body_is_json_schema": true,
+        "res_body_is_json_schema": true,
+        "api_opened": false,
+        "index": 0,
+        "tag": [],
+        "_id": 635584,
+        "method": "POST",
+        "catid": 157182,
+        "title": "测试接口",
+        "path": "/get/test",
+        "project_id": 17683,
+        "req_params": [],
+        "res_body_type": "json",
+        "uid": 30837,
+        "add_time": 1679727300,
+        "up_time": 1679737402,
+        "req_query": [
+            {
+                "required": "1",
+                "_id": "641ec23a1c3eeba8932559ab",
+                "name": "id",
+                "desc": "ID"
+            },
+            {
+                "required": "1",
+                "_id": "641ec23a1c3eeb7d2a2559aa",
+                "name": "name",
+                "example": "",
+                "desc": "姓名"
+            }
+        ],
+        "req_headers": [
+            {
+                "required": "1",
+                "_id": "641ec23a1c3eeb36992559ac",
+                "name": "Content-Type",
+                "value": "application/json"
+            }
+        ],
+        "req_body_form": [],
+        "__v": 0,
+        "desc": "",
+        "markdown": "",
+        "res_body": "{\"type\":\"object\",\"properties\":{\"data\":{\"type\":\"object\",\"properties\":{\"name\":{\"type\":\"string\",\"description\":\"name\"},\"id\":{\"type\":\"string\",\"description\":\"id\"}},\"required\":[\"name\",\"id\"],\"description\":\"data\"}},\"title\":\"data\",\"description\":\"数据\",\"required\":[\"data\"]}",
+        "req_body_other": "{\"type\":\"object\",\"title\":\"title\",\"properties\":{\"id\":{\"type\":\"string\",\"description\":\"ID\"},\"name\":{\"type\":\"string\",\"description\":\"姓名\"}},\"required\":[\"id\",\"name\"]}",
+        "req_body_type": "json",
+        "username": "leipengcm"
+    }
+}
