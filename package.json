@@ -1,46 +1,39 @@
 {
   "name": "web-effi-chrome",
-  "version": "1.0.0",
-  "private": true,
+  "version": "0.0.1",
+  "description": "chrome插件",
+  "main": "dist/cjs/index.js",
+  "module": "dist/esm/index.js",
   "scripts": {
-    "dev": "xn dev",
-    "build": "xn build"
+    "dev": "father dev && npm run copy",
+    "build": "father build && npm run copy",
+    "build:deps": "father prebundle",
+    "prepublishOnly": "father doctor && npm run build",
+    "copy": "cp -r public/* dist/"
+  },
+  "keywords": [],
+  "authors": [],
+  "license": "MIT",
+  "files": [
+    "dist",
+    "compiled"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "devDependencies": {
+    "father": "^4.1.7"
   },
   "dependencies": {
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.9.0",
+    "swr": "^2.1.1",
     "styled-components": "^5.3.9",
-    "swr": "^2.1.1"
-  },
-  "devDependencies": {
     "@types/node": "^18.11.4",
     "@types/react": "^18.0.21",
     "@types/react-dom": "^18.0.6",
     "@types/react-router-dom": "^5.3.3",
-    "@types/styled-components": "^5.1.26",
-    "@xn-sakina/meta": "^3.2.1",
-    "typescript": "^4.8.4"
-  },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
-  },
-  "pnpm": {
-    "overrides": {
-      "esbuild": "0.17.11"
-    }
-  },
-  "publishConfig": {
-    "access": "public",
-    "directory": "dist"
+    "@types/styled-components": "^5.1.26"
   }
 }
