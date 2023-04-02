@@ -1,5 +1,5 @@
 import {
-    copy, formatJson, getFormattedString, handelReqQuery, logger, message, options
+  copy, formatJson, getInterfaceString, getTempForAxios, handelReqQuery, logger, message, options
 } from "../utils/yapi-utils";
 import styled from "styled-components";
 import useSWR from "swr";
@@ -33,7 +33,8 @@ function getData() {
 export default function YapiContent() {
   const { data, error, mutate } = useSWR("/api/interface/get", getData);
   const res = data?.data ?? {};
-  const apiName = res.path ? getFormattedString(res.path) : "";
+  const apiName = res.path ? getInterfaceString(res.path) : "";
+
 
   function handleRetry() {
     mutate();
@@ -41,11 +42,11 @@ export default function YapiContent() {
 
   async function handleYapiRes() {
     const body = JSON.parse(res.res_body);
-
+    body.title = apiName + "Res"
     try {
       const jsttTs = await jstt.compile(
         formatJson(body),
-        apiName + "Res",
+        body.title,
         options
       );
       copy(jsttTs);
@@ -63,18 +64,20 @@ export default function YapiContent() {
     try {
       if (req_query.length > 0) {
         const formattedQuery = formatJson(handelReqQuery(req_query));
+        formattedQuery.title = apiName + "Query"
         jsttTsList[0] = await jstt.compile(
           formattedQuery,
-          `${apiName}Query`,
+          formattedQuery.title,
           options
         );
       }
 
       if (Object.keys(req_params).length > 0) {
         const formattedParams = formatJson(req_params);
+        formattedParams.title = apiName + "Params"
         jsttTsList[1] = await jstt.compile(
           formattedParams,
-          `${apiName}Params`,
+          formattedParams.title,
           options
         );
       }
@@ -86,11 +89,21 @@ export default function YapiContent() {
       message({ text: "生成失败", type: "error" });
     }
   }
+
+  const hanleAxiosTemp = () => {
+    let tempRes = getTempForAxios({
+      notes: res.title,
+      method: res.method,
+      path: res.path
+    })
+    copy(tempRes);
+  }
   return (
     <Box>
       <Title>TS 类型定义</Title>
       <YapiResBtn onClick={handleYapiRes}>返回数据</YapiResBtn>
       <YapiReqBtn onClick={handleYapiReq}>请求 body</YapiReqBtn>
+      <YapiReqBtn onClick={hanleAxiosTemp}>axios模板</YapiReqBtn>
     </Box>
   );
 }

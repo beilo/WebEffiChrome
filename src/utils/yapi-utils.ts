@@ -1,3 +1,13 @@
+export const logger = {
+  tag: "web-effi-chrome",
+  log(msg: any) {
+    console.log(logger.tag, msg);
+  },
+  error(msg: any) {
+    console.error(logger.tag, msg);
+  },
+};
+
 // 处理选项
 export const options = {
   bannerComment: "",
@@ -11,22 +21,22 @@ export const options = {
 
 // 复制文本
 export function copy(value: string) {
-  var copy = document.createElement("textarea");
-  document.body.appendChild(copy);
-  copy.value = value;
-  copy.select();
-  document.execCommand("copy");
-  document.body.removeChild(copy);
+  // var copy = document.createElement("textarea");
+  // document.body.appendChild(copy);
+  // copy.value = value;
+  // copy.select();
+  // document.execCommand("copy");
+  // document.body.removeChild(copy);
   logger.log(value);
 
-  //   navigator.clipboard.writeText(value).then(
-  //     function () {
-  //       console.log("复制成功！");
-  //     },
-  //     function (err) {
-  //       console.error("无法复制：", err);
-  //     }
-  //   );
+  navigator.clipboard.writeText(value).then(
+    function () {
+      console.log("复制成功！");
+    },
+    function (err) {
+      console.error("无法复制：", err);
+    }
+  );
 }
 
 // 格式化 JSON
@@ -49,7 +59,7 @@ export function formatJson(object: any) {
 }
 
 // 提取path转成大驼峰
-export function getFormattedString(str: string) {
+export function getFormattedString(str: string, firstIsUpperCase = true) {
   if (!str) {
     return "";
   }
@@ -60,12 +70,20 @@ export function getFormattedString(str: string) {
     return "";
   }
 
-  var output = "I";
+  var output = '';
   for (var i = 0; i < words.length; i++) {
-    output += words[i].charAt(0).toUpperCase() + words[i].slice(1);
+    if (!firstIsUpperCase && i === 0) {
+      output += words[i]
+    } else {
+      output += words[i].charAt(0).toUpperCase() + words[i].slice(1);
+    }
   }
 
   return output;
+}
+// 提取path转成接口
+export function getInterfaceString(str: string) {
+  return "I" + getFormattedString(str);
 }
 
 // 显示消息
@@ -120,12 +138,26 @@ export function handelReqQuery(req_query: any) {
   );
 }
 
-export const logger = {
-  tag: "web-effi-chrome",
-  log(msg: any) {
-    console.log(logger.tag, msg);
-  },
-  error(msg: any) {
-    console.error(logger.tag, msg);
-  },
-};
+export const getTempForAxios = (params: {
+  notes: string;
+  method: "POST" | "GET",
+  path: string;
+}) => {
+  const { path, notes, method } = params;
+  let apiName = getFormattedString(path, false);
+  let resApiName = apiName + "Res"
+  let reqApiName = apiName + "Req"
+  let temp = '';
+  if (method === 'GET') {
+    temp = `// ${notes}
+      export const ${apiName} = async (params: ${resApiName}) => {
+          return await api.${method.toLocaleLowerCase()}('${path}', { params });
+      }`
+  } else if (method === 'POST') {
+    temp = `// ${notes}
+      export const ${apiName} = async (data: ${resApiName}) => {
+          return await api.${method.toLocaleLowerCase()}('${path}', data);
+      }`
+  }
+  return temp;
+}

@@ -5,11 +5,12 @@
   "main": "dist/cjs/index.js",
   "module": "dist/esm/index.js",
   "scripts": {
-    "dev": "father dev && npm run copy",
-    "build": "father build && npm run copy",
+    "dev": "father dev",
+    "build": "father build",
     "build:deps": "father prebundle",
     "prepublishOnly": "father doctor && npm run build",
-    "copy": "cp -r public/* dist/"
+    "copy": "cp -r public/* dist/",
+    "test": "jest"
   },
   "keywords": [],
   "authors": [],
@@ -22,18 +23,21 @@
     "access": "public"
   },
   "devDependencies": {
-    "father": "^4.1.7"
+    "@types/jest": "^29.5.0",
+    "@types/node": "^18.11.4",
+    "@types/react": "^18.0.21",
+    "@types/react-dom": "^18.0.6",
+    "@types/react-router-dom": "^5.3.3",
+    "@types/styled-components": "^5.1.26",
+    "father": "^4.1.7",
+    "jest": "^29.5.0",
+    "ts-jest": "^29.0.5"
   },
   "dependencies": {
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.9.0",
-    "swr": "^2.1.1",
     "styled-components": "^5.3.9",
-    "@types/node": "^18.11.4",
-    "@types/react": "^18.0.21",
-    "@types/react-dom": "^18.0.6",
-    "@types/react-router-dom": "^5.3.3",
-    "@types/styled-components": "^5.1.26"
+    "swr": "^2.1.1"
   }
 }

@@ -18,4 +18,5 @@ export default defineConfig({
       "styled-components",
     ],
   },
+  sourcemap: true
 });
