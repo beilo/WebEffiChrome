@@ -1,6 +1,6 @@
 {
-  "name": "lp-jstt-xn",
-  "description": "Compile json schema to typescript typings",
+  "name": "jstt",
+  "description": "json生成typescript类型",
   "homepage_url": "http://chrome.google.com/webstore",
   "version": "0.0.2",
   "manifest_version": 2,

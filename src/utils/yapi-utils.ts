@@ -145,17 +145,16 @@ export const getTempForAxios = (params: {
 }) => {
   const { path, notes, method } = params;
   let apiName = getFormattedString(path, false);
-  let resApiName = apiName + "Res"
-  let reqApiName = apiName + "Req"
+  let resApiTypeName = getInterfaceString(path) + "Res"
   let temp = '';
   if (method === 'GET') {
     temp = `// ${notes}
-      export const ${apiName} = async (params: ${resApiName}) => {
+      export const ${apiName} = async (params: ${resApiTypeName}) => {
           return await api.${method.toLocaleLowerCase()}('${path}', { params });
       }`
   } else if (method === 'POST') {
     temp = `// ${notes}
-      export const ${apiName} = async (data: ${resApiName}) => {
+      export const ${apiName} = async (data: ${resApiTypeName}) => {
           return await api.${method.toLocaleLowerCase()}('${path}', data);
       }`
   }
