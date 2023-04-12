@@ -64,16 +64,19 @@ export function getFormattedString(str: string, firstIsUpperCase = true) {
     return "";
   }
 
-  var words = str.split("/").filter(Boolean);
+  var words = str
+    .replace(/[^a-zA-Z0-9]/g, " ")
+    .split(" ")
+    .filter(Boolean);
 
   if (words.length === 0 || words[0] === "") {
     return "";
   }
 
-  var output = '';
+  var output = "";
   for (var i = 0; i < words.length; i++) {
     if (!firstIsUpperCase && i === 0) {
-      output += words[i]
+      output += words[i];
     } else {
       output += words[i].charAt(0).toUpperCase() + words[i].slice(1);
     }
@@ -140,23 +143,23 @@ export function handelReqQuery(req_query: any) {
 
 export const getTempForAxios = (params: {
   notes: string;
-  method: "POST" | "GET",
+  method: "POST" | "GET";
   path: string;
 }) => {
   const { path, notes, method } = params;
   let apiName = getFormattedString(path, false);
-  let resApiTypeName = getInterfaceString(path) + "Res"
-  let temp = '';
-  if (method === 'GET') {
+  let resApiTypeName = getInterfaceString(path) + "Res";
+  let temp = "";
+  if (method === "GET") {
     temp = `// ${notes}
-      export const ${apiName} = async (params: ${resApiTypeName}) => {
+      export const ${apiName} = async (params) => {
           return await api.${method.toLocaleLowerCase()}('${path}', { params });
-      }`
-  } else if (method === 'POST') {
+      }`;
+  } else if (method === "POST") {
     temp = `// ${notes}
-      export const ${apiName} = async (data: ${resApiTypeName}) => {
+      export const ${apiName} = async (data) => {
           return await api.${method.toLocaleLowerCase()}('${path}', data);
-      }`
+      }`;
   }
   return temp;
-}
+};

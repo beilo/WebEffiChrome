@@ -7,8 +7,10 @@ describe('My App', () => {
     it("getFormattedString", () => {
         expect(getFormattedString(path)).toBe("GetTest")
         expect(getFormattedString(path, false)).toBe("getTest")
+        expect(getFormattedString('/crm-common/virtual/tag/list', false)).toBe("crmCommonVirtualTagList")
     })
     it("getInterfaceString", () => {
         expect(getInterfaceString(path)).toBe("IGetTest")
+        expect(getInterfaceString('/crm-common/virtual/tag/list')).toBe("ICrmCommonVirtualTagList")
     })
 });  
