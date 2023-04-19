@@ -12,7 +12,6 @@
     "storage",
     "cookies",
     "webRequest",
-    "declarativeNetRequest",
     "storage"
   ],
   "host_permissions": [
