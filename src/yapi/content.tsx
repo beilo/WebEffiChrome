@@ -131,10 +131,21 @@ export default function YapiContent() {
     <>
       <Box>
         <Title>TS 类型定义</Title>
-        <YapiResBtn onClick={handleYapiRes}>返回数据</YapiResBtn>
-        <YapiReqBtn onClick={handleYapiReq}>请求 body</YapiReqBtn>
-        <YapiReqBtn onClick={handleAxiosTemp}>axios模板</YapiReqBtn>
-
+        <YapiResBtn
+          style={{ width: "100%", marginBottom: 4 }}
+          onClick={handleYapiRes}
+        >
+          复制返回数据
+        </YapiResBtn>
+        <YapiReqBtn
+          style={{ width: "100%", marginBottom: 4 }}
+          onClick={handleYapiReq}
+        >
+          复制请求参数
+        </YapiReqBtn>
+        <YapiReqBtn style={{ width: "100%" }} onClick={handleAxiosTemp}>
+          复制axios模板
+        </YapiReqBtn>
         <Message className={messageClass}>
           <span>{msg.text}</span>
         </Message>

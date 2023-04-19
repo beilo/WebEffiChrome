@@ -24,6 +24,6 @@ function getAllCookiesForDomain(details, domain) {
   });
 }
 
-chrome.browserAction.onClicked.addListener(function () {
+chrome.action.onClicked.addListener(function () {
   chrome.tabs.create({ url: chrome.runtime.getURL("domain.html") });
 });
