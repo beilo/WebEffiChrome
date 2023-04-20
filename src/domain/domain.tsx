@@ -19,6 +19,7 @@ export default function Domain() {
     saveDomains(newDomains);
     setInputValue("");
   }
+
   useEffect(() => {
     chrome.storage.local.get("domain", function (data: any) {
       setDomains(data?.domain || []);
