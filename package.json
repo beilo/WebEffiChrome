@@ -1,6 +1,6 @@
 {
   "name": "web-effi-chrome",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "chrome插件",
   "main": "dist/cjs/index.js",
   "module": "dist/esm/index.js",
@@ -17,7 +17,8 @@
   "license": "MIT",
   "files": [
     "dist",
-    "compiled"
+    "compiled",
+    "index.d.ts"
   ],
   "publishConfig": {
     "access": "public"
