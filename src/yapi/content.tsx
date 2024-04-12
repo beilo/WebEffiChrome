@@ -95,7 +95,7 @@ export default function YapiContent() {
   const handleAxiosTemp = () => {
     try {
       let tempRes = getTempForAxios({
-        notes: res.title,
+        notes: `${res.title} ${window.location.href}`,
         method: res.method,
         path: res.path,
       });

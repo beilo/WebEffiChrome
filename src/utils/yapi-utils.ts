@@ -21,12 +21,6 @@ export const options = {
 
 // 复制文本
 export function copy(value: string) {
-  // var copy = document.createElement("textarea");
-  // document.body.appendChild(copy);
-  // copy.value = value;
-  // copy.select();
-  // document.execCommand("copy");
-  // document.body.removeChild(copy);
   logger.log(value);
 
   navigator.clipboard.writeText(value).then(
@@ -87,36 +81,6 @@ export function getFormattedString(str: string, firstIsUpperCase = true) {
 // 提取path转成接口
 export function getInterfaceString(str: string) {
   return "I" + getFormattedString(str);
-}
-
-// 显示消息
-export function message(opt: any) {
-  console.log(opt);
-  // var $box = document.createElement("div");
-  // $box.classList = "jstt-msg";
-
-  // var $img = document.createElement("img");
-  // var imgMap = {
-  //   success: "https://pic4.zhimg.com/v2-308857143bde384e934febb773155e6f.png",
-  //   error: "https://pic4.zhimg.com/v2-4ce78427966a67b427e33d87cdb9797f.png",
-  // };
-  // $img.src = imgMap[opt.type];
-
-  // var $text = document.createElement("div");
-
-  // $text.innerText = opt.text || "success~";
-
-  // $box.appendChild($img);
-  // $box.appendChild($text);
-
-  // document.body.appendChild($box);
-
-  // setTimeout(function () {
-  //   $box.classList = "jstt-msg is-leaving";
-  //   $box.addEventListener("transitionend", function () {
-  //     document.body.contains($box) && document.body.removeChild($box);
-  //   });
-  // }, 2000);
 }
 
 // 处理req_query
